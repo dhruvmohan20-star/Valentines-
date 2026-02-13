@@ -87,9 +87,18 @@
 </script>
 
 <!-- Background music -->
-<audio id="bgMusic" autoplay loop>
+<audio id="bgMusic" loop>
   <source src="https://cdn.jsdelivr.net/gh/fahim-abdullah/nazar-na-lag-jaye-jaanu.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+  // Start music on first tap anywhere (iOS friendly)
+  document.body.addEventListener('click', function startMusic() {
+    const music = document.getElementById('bgMusic');
+    music.play();
+    document.body.removeEventListener('click', startMusic);
+  });
+</script>
 
 </body>
 </html>
