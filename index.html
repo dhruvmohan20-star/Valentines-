@@ -60,25 +60,27 @@ const song = document.getElementById("song");
 
 let size = 22;
 
-// Start music on first interaction
-document.addEventListener("click", function() {
-    song.play().catch(()=>{});
-}, { once: true });
+// Start music on first click/tap anywhere
+function startMusic() {
+    song.play().catch(()=>{}); // required for browsers
+}
+document.addEventListener("click", startMusic, { once: true });
+document.addEventListener("touchstart", startMusic, { once: true });
 
-// No button runs away
+// Make NO button run away
 noBtn.addEventListener("mouseover", function() {
     const x = Math.random() * (window.innerWidth - 100);
     const y = Math.random() * (window.innerHeight - 100);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-    // Enlarge Yes button
+    // Grow YES button
     size += 5;
     yesBtn.style.fontSize = size + "px";
     yesBtn.style.padding = (size/2) + "px " + size + "px";
 });
 
-// Yes button clicked
+// YES button click
 yesBtn.addEventListener("click", function() {
     document.body.innerHTML = `
         <h1 style="margin-top:220px;font-size:50px;">
