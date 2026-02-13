@@ -3,101 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine Surprise</title>
+<title>Shreya ❤️</title>
+
 <style>
-  body {
+body {
     margin: 0;
     height: 100vh;
-    background: #ffe6e6;
-    overflow: hidden;
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  h1 {
-    color: #ff4d6d;
-    font-size: 2.5em;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
     text-align: center;
-    cursor: pointer;
-  }
-  button {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    color: white;
+}
+
+h1 {
+    margin-top: 120px;
+    font-size: 42px;
+}
+
+button {
     padding: 15px 30px;
-    font-size: 20px;
-    margin: 10px;
-    cursor: pointer;
+    font-size: 22px;
     border: none;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    display: none; /* Hidden until first tap */
-  }
-  #yesBtn { background-color: #ff4d6d; color: white; }
-  #noBtn { background-color: #ccc; }
-  .floating {
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 15px;
+    transition: 0.2s;
+}
+
+#yesBtn {
+    background: #ff004f;
+    color: white;
+}
+
+#noBtn {
+    background: black;
+    color: white;
     position: absolute;
-    font-size: 20px;
-    animation: float 5s linear infinite;
-  }
-  @keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-  }
+}
 </style>
 </head>
+
 <body>
 
-<h1 id="startBtn">Shreya, will you be my Valentine? ❤️<br><small>(Tap here!)</small></h1>
+<h1>Shreya 💖<br>Will you be my Valentine?</h1>
 
-<div class="container">
-  <button id="yesBtn">Yes</button>
-  <button id="noBtn">No</button>
-</div>
+<button id="yesBtn">Yes 💕</button>
+<button id="noBtn">No 😜</button>
 
-<audio id="bgMusic" loop>
-  <source src="https://cdn.jsdelivr.net/gh/fahim-abdullah/nazar-na-lag-jaye-jaanu.mp3" type="audio/mpeg">
-</audio>
+<audio id="song" src="song.mp3" loop></audio>
 
 <script>
-  const startBtn = document.getElementById('startBtn');
-  const yesBtn = document.getElementById('yesBtn');
-  const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const song = document.getElementById("song");
 
-  function startConfetti() {
-    const shapes = ['❤️','💖','💘','💝','🎉','✨','💞'];
-    for(let i=0;i<60;i++){
-      const el = document.createElement('div');
-      el.className = 'floating';
-      el.innerText = shapes[Math.floor(Math.random()*shapes.length)];
-      el.style.left = Math.random()*100 + 'vw';
-      el.style.fontSize = (15 + Math.random()*30) + 'px';
-      el.style.animationDuration = (4 + Math.random()*4) + 's';
-      document.body.appendChild(el);
-    }
-  }
+let size = 22;
 
-  // Start experience on first tap
-  startBtn.addEventListener('click', function() {
-    document.getElementById('bgMusic').play();
-    startConfetti();
-    yesBtn.style.display = 'inline-block';
-    noBtn.style.display = 'inline-block';
-    startBtn.style.display = 'none';
-  });
+// Start music on first interaction
+document.addEventListener("click", function() {
+    song.play().catch(()=>{});
+}, { once: true });
 
-  // Runaway No button
-  noBtn.addEventListener('mouseenter', () => {
-    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-    noBtn.style.position = 'absolute';
-    noBtn.style.left = x + 'px';
-    noBtn.style.top = y + 'px';
-  });
+// No button runs away
+noBtn.addEventListener("mouseover", function() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 
-  // Yes button message
-  yesBtn.addEventListener('click', () => {
-    document.body.innerHTML = '<h1 style="text-align:center;color:#ff4d6d;font-size:3em;margin-top:20vh;">Lucky you, you just don\'t know it yet ❤️💖💘</h1>';
-  });
+    // Enlarge Yes button
+    size += 5;
+    yesBtn.style.fontSize = size + "px";
+    yesBtn.style.padding = (size/2) + "px " + size + "px";
+});
+
+// Yes button clicked
+yesBtn.addEventListener("click", function() {
+    document.body.innerHTML = `
+        <h1 style="margin-top:220px;font-size:50px;">
+            Lucky you 😉, you just don't know it yet
+        </h1>
+    `;
+});
 </script>
 
 </body>
